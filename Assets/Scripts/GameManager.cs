@@ -1,16 +1,26 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public bool isGameActive = false;
+
     void Start()
     {
-        
+        // All'inizio il gioco è fermo finché non premiamo "Start" nel menu
+        Time.timeScale = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartGame()
     {
-        
+        isGameActive = true;
+        Time.timeScale = 1; // Fa ripartire il tempo
+        Debug.Log("Gara Iniziata!");
+    }
+
+    public void RestartGame()
+    {
+        // Ricarica la scena attuale
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

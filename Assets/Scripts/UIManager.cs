@@ -1,16 +1,21 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject mainMenuPanel;
+    public GameManager gameManager;
+
+    // Metodo collegato al bottone "Play"
+    public void OnPlayButtonPressed()
     {
-        
+        mainMenuPanel.SetActive(false); // Nasconde il menu
+        gameManager.StartGame();        // Avvia il gioco
     }
 
-    // Update is called once per frame
-    void Update()
+    // Metodo collegato al bottone "Restart"
+    public void OnRestartButtonPressed()
     {
-        
+        gameManager.RestartGame();
     }
 }
