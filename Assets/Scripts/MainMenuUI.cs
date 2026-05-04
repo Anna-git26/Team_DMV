@@ -1,19 +1,19 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Fondamentale per cambiare scene
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class MainMenuUI : MonoBehaviour
 {
-    // Funzione per caricare la pista (la scena del gioco)
-    public void PlayGame()
+    public string gameSceneName = "GameScene"; // Nome della scena di gioco
+
+    public void PlayButton()
     {
-        // "GameScene" deve essere il nome esatto della tua scena della pista
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(gameSceneName);
     }
 
-    // Funzione per chiudere il gioco
-    public void QuitGame()
+    public void QuitButton()
     {
-        Debug.Log("Il gioco si sta chiudendo..."); // Utile per testare nell'editor
+        Debug.Log("Esco dal gioco"); // Funziona solo nella build
         Application.Quit();
     }
 }

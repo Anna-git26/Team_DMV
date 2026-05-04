@@ -3,24 +3,48 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     public bool isGameActive = false;
+    public float raceTime = 0f;
 
-    void Start()
+    void Awake()
     {
-        // All'inizio il gioco è fermo finché non premiamo "Start" nel menu
-        Time.timeScale = 0;
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
+    }
+
+    void Update()
+    {
+        if (isGameActive)
+        {
+            raceTime += Time.deltaTime;
+            UIManager.instance.UpdateTime(raceTime);
+        }
     }
 
     public void StartGame()
     {
         isGameActive = true;
-        Time.timeScale = 1; // Fa ripartire il tempo
-        Debug.Log("Gara Iniziata!");
+        raceTime = 0f;
+        Time.timeScale = 1f;
     }
 
-    public void RestartGame()
+    public void EndRace()
     {
-        // Ricarica la scena attuale
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        isGameActive = false;
+        UIManager.instance.ShowEndPanel(raceTime);
+        Time.timeScale = 0f; // Mette in pausa
+    }
+
+    public void RestartRace()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void BackToMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu"); // Nome della scena del menu
     }
 }

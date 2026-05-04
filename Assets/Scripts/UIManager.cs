@@ -3,19 +3,31 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject mainMenuPanel;
-    public GameManager gameManager;
+    public static UIManager instance;
+    public Text timeText;
+    public GameObject endPanel;
+    public Text finalTimeText;
 
-    // Metodo collegato al bottone "Play"
-    public void OnPlayButtonPressed()
+    void Awake()
     {
-        mainMenuPanel.SetActive(false); // Nasconde il menu
-        gameManager.StartGame();        // Avvia il gioco
+        instance = this;
+        endPanel.SetActive(false);
     }
 
-    // Metodo collegato al bottone "Restart"
-    public void OnRestartButtonPressed()
+    public void UpdateTime(float time)
     {
-        gameManager.RestartGame();
+        int minutes = Mathf.FloorToInt(time / 60f);
+        int seconds = Mathf.FloorToInt(time % 60f);
+        int milliseconds = Mathf.FloorToInt((time * 100f) % 100f);
+        timeText.text = string.Format("{0:00}:{1:00}.{2:00}", minutes, seconds, milliseconds);
+    }
+
+    public void ShowEndPanel(float finalTime)
+    {
+        endPanel.SetActive(true);
+        int minutes = Mathf.FloorToInt(finalTime / 60f);
+        int seconds = Mathf.FloorToInt(finalTime % 60f);
+        int milliseconds = Mathf.FloorToInt((finalTime * 100f) % 100f);
+        finalTimeText.text = "Tempo: " + string.Format("{0:00}:{1:00}.{2:00}", minutes, seconds, milliseconds);
     }
 }
