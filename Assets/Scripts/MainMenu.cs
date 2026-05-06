@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         // Sostituisci "NomeDellaTuaScenaDiGioco" con il nome reale della scena in cui si corre
-        SceneManager.LoadScene("NomeDellaTuaScenaDiGioco");
+        SceneManager.LoadScene("adem");
     }
 
     // Funzione da collegare al bottone "Exit"
